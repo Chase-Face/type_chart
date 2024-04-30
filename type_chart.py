@@ -1,64 +1,50 @@
-import requests
-from cache import load_cache, save_cache
-from type_weaknesses import get_type_weaknesses
-
-CACHE_FILE = "pokemon_cache.json"
+from type_weaknesses import dual_type_weaknesses, mono_type_weaknesses
+from pypokedex import get
 
 def main():
-    all_pokemon_types = load_cache(CACHE_FILE)  # Load data from cache or fetch from API
-    if not all_pokemon_types:
-        all_pokemon_types = get_all_pokemon_types()
-        save_cache(all_pokemon_types, CACHE_FILE)  # Save fetched data to cache
+    #dual_type_weaknesses = {"flying/fire": ["electric", "water", "rock"], "ground/dragon": ["ice", "dragon", "fairy"]}  # Example dictionary
+
+    
 
     pokemon_name = input("Enter a Pokémon name: ").lower()
-    if pokemon_name in all_pokemon_types:
-        pokemon_types = all_pokemon_types[pokemon_name]
-        pokemon_weaknesses = get_type_weaknesses(pokemon_types)
-        if pokemon_weaknesses:
-            print(f"{pokemon_name.capitalize()} is weak to:")
-            for weakness in pokemon_weaknesses:
-                print("-", weakness.capitalize())
+
+    # Fetch Pokémon data using pypokedex
+    pokemon = get(name=pokemon_name)
+
+    types = pokemon.types  # Get the types of the Pokémon
+    
+    if dual(types):
+        dual_type = "/".join(types)
+        print(f"Dual-type Pokémon with types: {dual_type}")
+        if dual_type in dual_type_weaknesses:
+            print("Weaknesses:")
+            for weakness in dual_type_weaknesses[dual_type]:
+                print("-", weakness)
+                
         else:
-            print(f"{pokemon_name.capitalize()} has no weaknesses!")
+            # Check if the reverse order exists in the dictionary
+            reversed_dual_type = "/".join(reversed(types))
+            if reversed_dual_type in dual_type_weaknesses:
+                print(f"Reversed dual type found: {reversed_dual_type}")
+                print("Weaknesses:")
+                for weakness in dual_type_weaknesses[reversed_dual_type]:
+                    print("-", weakness)
+                    
+            else:
+                print("No weaknesses found.")
     else:
-        print(f"{pokemon_name.capitalize()} not found in the Pokémon database.")
+        print("Monotype Pokémon")
+        monotype = types[0]
+        print(f"Type: {monotype}")
+        if monotype in mono_type_weaknesses:
+            print("Weaknesses:")
+            for weakness in mono_type_weaknesses[monotype]:
+                print("-", weakness)
+        else:
+            print("No weaknesses found.")
 
-def get_pokemon_weaknesses(types):
-    type_weaknesses = load_type_weaknesses()
-    weaknesses = set()
-    for pokemon_type in types:
-        if pokemon_type in type_weaknesses:
-            weaknesses.update(type_weaknesses[pokemon_type])
-    return weaknesses
-
-def load_type_weaknesses():
-    # Define your type weaknesses dictionary here or load it from a file
-    return {
-        "fire": ["water", "rock"],
-        "water": ["electric", "grass"],
-        # Add more type weaknesses as needed
-    }
-
-def get_all_pokemon_types():
-    url = "https://pokeapi.co/api/v2/pokemon?limit=10000"  # Adjust the limit to fetch all Pokémon
-    response = requests.get(url)
-
-    if response.status_code == 200:
-        data = response.json()
-        all_pokemon_types = {}
-
-        for pokemon in data.get("results", []):
-            pokemon_name = pokemon.get("name")
-            pokemon_url = pokemon.get("url")
-
-            pokemon_data = requests.get(pokemon_url).json()
-            types = [t["type"]["name"] for t in pokemon_data["types"]]
-            all_pokemon_types[pokemon_name] = types
-
-        return all_pokemon_types
-    else:
-        print("Error: API request failed.")
-        return {}
+def dual(types):
+    return len(types) == 2
 
 if __name__ == "__main__":
     main()

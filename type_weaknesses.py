@@ -1,5 +1,5 @@
 # Define type weaknesses
-TYPE_WEAKNESSES = {
+mono_type_weaknesses = {
     "normal": [],
     "fire": ["water", "rock"],
     "water": ["electric", "grass"],
@@ -20,8 +20,48 @@ TYPE_WEAKNESSES = {
     "fairy": ["poison", "steel"],
 }
 
-def get_type_weaknesses(pokemon_types):
-    weaknesses = set()
-    for pokemon_type in pokemon_types:
-        weaknesses.update(TYPE_WEAKNESSES.get(pokemon_type, []))
-    return weaknesses
+dual_type_weaknesses = {
+    "ground/rock": ["water2x", "grass2x", "fighting", "ground", "steel", "ice"],
+    "rock/ice": ["fighting", "steel", "ground", "rock", "water", "grass"],
+    "bug/grass": ["flying2x", "fire2x", "poison", "rock", "bug", "ice"],
+    "rock/fire": ["ground", "water2x", "fighting", "rock"],
+    "bug/ice": ["rock", "fire2x", "flying2x", "steel"],
+    "rock/steel": ["fighting", "ground", "water2x"],
+    "steel/ice": ["fighting", "fire2x", "ground"],
+    "ghost/psychic": ["ghost2x", "dark"],
+    "rock/dark": ["fighting", "ground", "bug", "steel", "water2x", "grass2x", "fairy"],
+    "grass/psychic": ["bug", "flying2x", "poison", "ghost", "fire", "ice", "dark"],
+    "grass/ice": ["fire2x", "fighting", "flying", "poison", "rock", "bug", "steel"],
+    "grass/dark": ["fire2x", "fighting", "flying", "poison", "rock", "bug", "steel"],
+    "fighting/grass": ["flying2x", "poison", "fire", "psychic", "ice", "fairy"],
+    "grass/dragon": ["ice2x", "flying", "poison", "bug", "dragon", "fairy"],
+    "ice/dark": ["fighting", "rock", "bug", "steel", "fire", "fairy"],
+    "normal/rock": ["fighting", "ground", "steel", "water2x", "grass2x"],
+    "fighting/dragon": ["fairy2x", "flying", "psychic", "ice", "dragon"],
+    "flying/bug": ["rock", "flying", "fire", "electric", "ice"],
+    "flying/grass": ["ice2x", "flying", "poison", "rock", "fire"],
+    "grass/fairy": ["poison2x", "flying", "steel", "fire", "ice"],
+    "dragon/dark": ["fairy2x", "fighting", "bug", "ice", "dragon"],
+    "normal/steel": ["fighting", "ground", "fire"],
+    "normal/dark": ["fighting", "bug", "fairy"],
+    "fighting/poison": ["psychic2x", "flying", "fire", "ground"],
+    "fighting/dark": ["fairy2x", "fighting", "flying"],
+    "flying/fire": ["rock", "water", "electric"],
+    "ground/dragon": ["ice2x", "dragon", "fairy"],
+    "bug/fire": ["rock", "flying", "water"],
+    "steel/fire": ["ground", "fighting", "water"],
+    "steel/electric": ["ground", "fighting", "fire"],
+    "steel/dark": ["fighting", "ground", "fire"],
+    "fire/electric": ["ground", "rock", "water"],
+    "flying/ground": ["ice2x", "water"],
+    "flying/water": ["electric2x", "rock"],
+    "poison/steel": ["ground", "fire", "fighting"],
+    "poison/electric": ["ground", "psychic"],
+    "ground/fire": ["water2x", "ground"],
+    "steel/grass": ["fire2x", "fighting"],
+    "psychic/dark": ["bug2x", "fairy"],
+    "ground/water": ["grass2x"],
+    "bug/steel": ["fire2x"],
+    "fighting/rock": ["fighting", "ground", "steel", "water2x", "grass2x", "psychic", "fairy"],
+    "rock/psychic": ["ground", "bug", "ghost", "steel", "water", "grass", "dark"]
+}
