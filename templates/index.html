@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Type Weaknesses</title>
+</head>
+<body>
+    <h1>Pokémon Type Weaknesses</h1>
+    <form action="/" method="post">
+        <label for="pokemon_name">Enter a Pokémon name:</label>
+        <input type="text" id="pokemon_name" name="pokemon_name">
+        <button type="submit">Submit</button>
+    </form>
+    <div>
+        {% if result %}
+            <h2>Result:</h2>
+            <pre>{{ result }}</pre>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -46,7 +46,7 @@ dual_type_weaknesses = {
     "normal/dark": ["fighting", "bug", "fairy"],
     "fighting/poison": ["psychic2x", "flying", "fire", "ground"],
     "fighting/dark": ["fairy2x", "fighting", "flying"],
-    "flying/fire": ["rock", "water", "electric"],
+    "flying/fire": ["rock2x", "water", "electric"],
     "ground/dragon": ["ice2x", "dragon", "fairy"],
     "bug/fire": ["rock", "flying", "water"],
     "steel/fire": ["ground", "fighting", "water"],
@@ -61,7 +61,9 @@ dual_type_weaknesses = {
     "steel/grass": ["fire2x", "fighting"],
     "psychic/dark": ["bug2x", "fairy"],
     "ground/water": ["grass2x"],
+    "normal/flying": ["electric", "ice", "rock"],
     "bug/steel": ["fire2x"],
     "fighting/rock": ["fighting", "ground", "steel", "water2x", "grass2x", "psychic", "fairy"],
     "rock/psychic": ["ground", "bug", "ghost", "steel", "water", "grass", "dark"]
+    
 }

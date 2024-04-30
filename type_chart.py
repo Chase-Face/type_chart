@@ -1,8 +1,7 @@
 from type_weaknesses import dual_type_weaknesses, mono_type_weaknesses
 from pypokedex import get
 
-def main():
-    #dual_type_weaknesses = {"flying/fire": ["electric", "water", "rock"], "ground/dragon": ["ice", "dragon", "fairy"]}  # Example dictionary
+def main(pokemon_name):
 
     
 
