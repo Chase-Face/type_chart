@@ -70,5 +70,6 @@ resistances = {
 
 immunities = {
     "ground": ["electric"],
-    "grass/dragon": ["electric"]
+    "grass/dragon": ["electric"],
+    "steel": ["poison"]
 }
