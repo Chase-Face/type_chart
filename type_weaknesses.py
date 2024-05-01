@@ -1,6 +1,5 @@
-# Define type weaknesses
-mono_type_weaknesses = {
-    "normal": [],
+weaknesses = {
+    "normal": ["fighting"],
     "fire": ["water", "rock"],
     "water": ["electric", "grass"],
     "electric": ["ground"],
@@ -18,9 +17,6 @@ mono_type_weaknesses = {
     "dark": ["fighting", "bug", "fairy"],
     "steel": ["fire", "fighting", "ground"],
     "fairy": ["poison", "steel"],
-}
-
-dual_type_weaknesses = {
     "ground/rock": ["water2x", "grass2x", "fighting", "ground", "steel", "ice"],
     "rock/ice": ["fighting", "steel", "ground", "rock", "water", "grass"],
     "bug/grass": ["flying2x", "fire2x", "poison", "rock", "bug", "ice"],
@@ -66,4 +62,13 @@ dual_type_weaknesses = {
     "fighting/rock": ["fighting", "ground", "steel", "water2x", "grass2x", "psychic", "fairy"],
     "rock/psychic": ["ground", "bug", "ghost", "steel", "water", "grass", "dark"]
     
+}
+
+resistances = {
+    "water": ["fire", "water", "ice", "steel"]
+}
+
+immunities = {
+    "ground": ["electric"],
+    "grass/dragon": ["electric"]
 }
